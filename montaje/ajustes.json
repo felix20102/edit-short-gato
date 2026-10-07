@@ -1,0 +1,46 @@
+{
+  "_nota": "Coordenadas en píxeles del lienzo final 1080x1920. Revisar al recibir el vídeo fuente.",
+  "fuente": "recursos/fuente/ssstik.io_memepremeo_1791393753702.mp4",
+
+  "titulo": {
+    "_nota": "Se tapa el título en inglés del original y se escribe la traducción con el mismo estilo.",
+    "caja": [0, 0, 1080, 250],
+    "parche": "color_borde",
+    "lineas": ["RANKING DE LOS MOMENTOS", "MÁS GRACIOSOS CON GARABATOS"],
+    "fuente": "/usr/share/fonts/opentype/inter/Inter-Black.otf",
+    "tamano": 64,
+    "relleno": "#FFFFFF",
+    "contorno": "#000000",
+    "grosor_contorno": 6,
+    "interlineado": 1.1
+  },
+
+  "zonas_fijas": {
+    "_nota": "Zonas del original que no se amplían en los zooms de repetición (título y ranking original).",
+    "titulo": [0, 0, 1080, 250],
+    "ranking": [0, 250, 340, 1150]
+  },
+
+  "zooms": {
+    "_nota": "Centro del zoom (x, y) en el lienzo para cada repetición.",
+    "p5": [540, 900],
+    "p4": [540, 800],
+    "p3": [540, 1000],
+    "p2": [540, 900],
+    "p1": [540, 1000]
+  },
+
+  "recorte_nina": {
+    "_nota": "Fotograma del original (s) y caja de la cara de la niña mirando de reojo.",
+    "t_orig": 8.5,
+    "caja": [340, 600, 740, 1000]
+  },
+
+  "anclas": {
+    "_nota": "Fracciones (x, y) dentro de cada PNG de pose. Ajustar si se usan las poses reales.",
+    "defecto": {"nariz": [0.5, 0.45], "frente": [0.5, 0.22], "oreja": [0.24, 0.1],
+                "pecho": [0.5, 0.74], "pata": [0.76, 0.66], "boca": [0.5, 0.5]},
+    "espaldas": {"nariz": [0.7, 0.42], "frente": [0.62, 0.2], "oreja": [0.3, 0.1],
+                 "pecho": [0.5, 0.74], "pata": [0.76, 0.66], "boca": [0.7, 0.48]}
+  }
+}
