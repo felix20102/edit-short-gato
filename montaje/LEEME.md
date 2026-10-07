@@ -2,6 +2,7 @@
 
 ```
 cd montaje
+python3 herramientas/extraer_poses.py        # recorta las poses de recursos/hojas/
 python3 herramientas/montar.py salida/ranking_desastres.mp4
 ```
 
@@ -10,6 +11,7 @@ Lo que falte en `recursos/` se sustituye por un provisional y aparece listado al
 | Carpeta | Archivos esperados |
 |---|---|
 | `recursos/fuente/` | `ssstik.io_memepremeo_1791393753702.mp4` |
+| `recursos/hojas/` | Tus dos hojas de poses (de ahí salen las de `recursos/poses/`) |
 | `recursos/poses/` (PNG con transparencia) | `perito_habla` (hoja 2 · 6), `perito_golpe` (hoja 2 · 4), `perito_serio` (hoja 2 · 1), `seco` (hoja 1 · fila 3, col. 1), `perito_confuso` (hoja 2 · 3), `brazos_cruzados` (hoja 1 · fila 2, col. 5), `espaldas` (nueva), `chamuscado` y `chamuscado_erizado` (nuevas) |
 | `recursos/fondos/` | `papel_arrugado`, `papel`, `pista`, `feria` (1080×1920) |
 | `recursos/props/` | `portapapeles`, `acreditacion`, `bate`, `tirita`, `pelota_beisbol`, `venda`, `chaleco`, `chaleco_quemado`, `pelota_feria`, `cable`, `hoja_parte` |

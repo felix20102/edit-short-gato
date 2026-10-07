@@ -296,6 +296,7 @@ def pose_img(nombre):
         else:
             img = img.crop(img.getbbox())
             img = img.resize((int(img.width * ALTO_POSE / img.height), ALTO_POSE), Image.LANCZOS)
+            img = img.filter(ImageFilter.UnsharpMask(radius=3, percent=60, threshold=2))
         _poses[nombre] = img
     return _poses[nombre]
 
@@ -623,7 +624,7 @@ def capa_gato(pose, props, rot_bate=None, bate_escala=1.0):
     colocacion = {
         "chaleco": ("pecho", 0.40, 0, 0.02), "chaleco_quemado": ("pecho", 0.40, 0, 0.02),
         "acreditacion": ("pecho", 0.11, 0, -0.04), "portapapeles": ("pata", 0.17, -8, 0.02),
-        "tirita": ("nariz", 0.14, -10, 0), "pelota_beisbol": ("frente", 0.12, 0, 0),
+        "tirita": ("nariz", 0.11, -10, 0), "pelota_beisbol": ("frente", 0.12, 0, 0),
         "venda": ("oreja", 0.13, 30, 0), "hoja_parte": ("pecho", 0.32, 4, 0.04),
     }
     for p in (p for p in props if p != "cable"):
@@ -675,7 +676,7 @@ def punto_en_lienzo(pose, punto, alto, cx, cy, escala=1.0):
 def tarjeta1(t):  # 3,48–9,00 · perito, bate y tirita
     l = FONDOS["papel_arrugado"].copy()
     pose = "perito_golpe" if t >= 8.33 else "perito_habla"
-    props = ["acreditacion", "portapapeles"] + (["tirita"] if t >= 8.60 else [])
+    props = ["acreditacion"] + (["tirita"] if t >= 8.60 else [])  # el portapapeles ya está en la pose
     rot_bate, bate_esc = None, 1.0
     if 7.96 <= t < 8.50:
         bate_esc = min(1.0, pop(t, 7.96, 0.1)) if t < 8.06 else 1.0
@@ -686,7 +687,7 @@ def tarjeta1(t):  # 3,48–9,00 · perito, bate y tirita
     gato_en(l, pose, props, 760, 330, 870, escala, rot=-8 if t >= 8.33 else 0, rot_bate=rot_bate, bate_escala=bate_esc)
     if t >= 8.60 and t < 8.70:  # pop de la tirita
         x, y = punto_en_lienzo(pose, "nariz", 760, 330, 870)
-        pegar(l, prop_ancho("tirita", 0.14 * 760), x, y, escala=pop(t, 8.60, 0.1) * 0.4, alfa=0.6)
+        pegar(l, prop_ancho("tirita", 0.11 * 760), x, y, escala=pop(t, 8.60, 0.1) * 0.4, alfa=0.6)
     if t >= 4.20:
         k = tramo(t, 4.20, 0.20)
         y = lerp(-250, 330, suave(k)) if t < 4.40 else lerp(330, 300, tramo(t, 4.40, 0.15))
@@ -716,19 +717,18 @@ def recorte_nina(fuente_v):
 
 def tarjeta2(t, extras):  # 12,30–17,40 · «Señorita…» + «Bizcocho.»
     l = FONDOS["papel"].copy()
-    pose = "seco" if t >= 15.58 else "perito_serio"
-    alto, cy = 2600, 1050
-    x = lerp(-700, 430, suave(tramo(t, 12.30, 0.20)))
+    pose = "perito_serio"  # serio a cámara durante toda la tarjeta; ya lleva portapapeles
+    alto, cy = 2600, 1250  # la mesa «ENTREVISTAS» queda fuera de cuadro
+    x = lerp(-1300, 430, suave(tramo(t, 12.30, 0.20)))
     blur = 70 if t < 12.50 else 0
     gato_en(l, pose, ["tirita"], alto, x, cy, blur_x=blur)
-    # portapapeles en primer plano, abajo a la izquierda
-    pegar(l, prop_ancho("portapapeles", 380), 250, 1520, rot=-6)
     if t >= 14.95:
-        xr = lerp(1260, 850, suave(tramo(t, 14.95, 0.15)))
-        pegar(l, extras["nina"], xr, 760, escala=rebote(t, 15.10, 0.15))
+        xr = lerp(1260, 870, suave(tramo(t, 14.95, 0.15)))
+        pegar(l, extras["nina"], xr, 560, escala=rebote(t, 15.10, 0.15))
         l.alpha_composite(vineta(lerp(0, 0.6, tramo(t, 14.95, 0.63))))
-    dibuja_sello(l, SELLO_APROBADO, 250, 1540, t, 16.72)
-    return l, temblor(t, 16.80, 0.15, 6), 1720
+    sx, sy = punto_en_lienzo(pose, "portapapeles", alto, 430, cy)
+    dibuja_sello(l, SELLO_APROBADO, min(sx, W - SELLO_APROBADO.width / 2 - 20), sy, t, 16.72)
+    return l, temblor(t, 16.80, 0.15, 6), 1560
 
 
 def tarjeta3(t):  # 20,61–24,10 · «Me pusieron de pelota.»
@@ -955,7 +955,7 @@ def main():
         fuente_v = Fuente(AJ["fuente"], tmp)
         for nombre in ("papel_arrugado", "papel", "pista", "feria"):
             FONDOS[nombre] = fondo(nombre)
-        for p in ("perito_habla", "perito_golpe", "perito_serio", "seco", "espaldas", "perito_confuso",
+        for p in ("perito_habla", "perito_golpe", "perito_serio", "espaldas", "perito_confuso",
                   "brazos_cruzados", "chamuscado", "chamuscado_erizado"):
             pose_img(p)
         extras = {"nina": recorte_nina(fuente_v)}
