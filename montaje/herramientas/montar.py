@@ -456,8 +456,8 @@ def logo():
 LOGO = logo()
 
 
-def subtitulo(lienzo, t, cx, cy):
-    for a, b, txt, clave in SUBS:
+def subtitulo(lienzo, t, cx, cy, subs=SUBS):
+    for a, b, txt, clave in subs:
         if a <= t < b:
             break
     else:

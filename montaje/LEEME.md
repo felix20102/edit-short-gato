@@ -1,5 +1,31 @@
 # Montaje · Ranking mejores desastres del año
 
+## Versión sencilla (la pedida)
+
+Clips originales tal cual (imagen y sonido, sin título traducido, zooms, repeticiones ni logo) y, entre clip y clip, el gato hablando sobre papel claro, con su voz y subtítulos. Sin efectos ni sonidos añadidos.
+
+```
+cd montaje
+python3 herramientas/montar_simple.py salida/ranking_desastres_simple.mp4
+```
+
+Resultado: `salida/ranking_desastres_simple.mp4` (35,9 s).
+
+| Tramo | Contenido |
+|---|---|
+| 0,00–2,57 | Clip puesto 5 (orig. 0,00–2,56) |
+| 2,57–7,73 | Gato: «Soy el perito del seguro. Hay que reconstruir el accidente. A ver, trae.» |
+| 7,73–11,20 | Clip puesto 4 (orig. 5,67–9,13) |
+| 11,20–16,20 | Gato en primer plano: «Señorita, para el parte: ¿esto qué es exactamente?» · 0,8 s de silencio · «Bizcocho.» |
+| 16,20–19,57 | Clip puesto 3 (orig. 12,80–16,17) |
+| 19,57–23,00 | Gato: «Ese partido lo cubrí yo, ¿eh? Me pusieron de pelota.» (cambia de pose en «pelota») |
+| 23,00–24,97 | Clip puesto 2 (orig. 20,00–21,97) |
+| 24,97–29,00 | Gato: «Revisión de la caseta. Me han dado chaleco, así que aquí no me pue—» (corte seco) |
+| 29,00–31,50 | Clip puesto 1 (orig. 24,60–27,10) |
+| 31,50–35,87 | Gato chamuscado: «Estoy bien, ¿eh? Estoy bien.» · «Lo he probado para el parte.» |
+
+## Versión completa (con efectos)
+
 ```
 cd montaje
 python3 herramientas/extraer_poses.py        # recorta las poses de recursos/hojas/
