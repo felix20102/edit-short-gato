@@ -1,0 +1,37 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Gato,Montserrat Black,92,&H00E6F4FA,&H00E6F4FA,&H00142333,&H64000000,-1,0,0,0,100,100,0,0,1,7,3,2,80,80,560,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:03.67,0:00:04.47,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}SOY EL {\c&H00D4FF&}PERITO{\c&HE6F4FA&}
+Dialogue: 0,0:00:04.47,0:00:05.13,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}DEL SEGURO
+Dialogue: 0,0:00:05.47,0:00:06.23,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}HAY QUE RECONSTRUIR
+Dialogue: 0,0:00:06.23,0:00:07.13,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}EL ACCIDENTE
+Dialogue: 0,0:00:07.57,0:00:07.90,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}A VER,
+Dialogue: 0,0:00:07.97,0:00:08.33,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}{\c&H00D4FF&}TRAE.{\c&HE6F4FA&}
+Dialogue: 0,0:00:12.40,0:00:13.03,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}SEÑORITA,
+Dialogue: 0,0:00:13.33,0:00:13.97,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}PARA EL PARTE:
+Dialogue: 0,0:00:14.40,0:00:14.93,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}¿ESTO QUÉ ES
+Dialogue: 0,0:00:14.93,0:00:15.57,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}EXACTAMENTE?
+Dialogue: 0,0:00:16.37,0:00:16.90,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}{\c&H00D4FF&}BIZCOCHO.{\c&HE6F4FA&}
+Dialogue: 0,0:00:20.77,0:00:21.40,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}ESE PARTIDO
+Dialogue: 0,0:00:21.40,0:00:22.07,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}LO CUBRÍ YO, ¿EH?
+Dialogue: 0,0:00:22.53,0:00:23.13,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}ME PUSIERON
+Dialogue: 0,0:00:23.13,0:00:23.63,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}DE {\c&H00D4FF&}PELOTA.{\c&HE6F4FA&}
+Dialogue: 0,0:00:27.27,0:00:27.93,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}REVISIÓN
+Dialogue: 0,0:00:27.93,0:00:28.40,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}DE LA CASETA.
+Dialogue: 0,0:00:28.70,0:00:29.17,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}ME HAN DADO
+Dialogue: 0,0:00:29.17,0:00:29.63,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}{\c&H00D4FF&}CHALECO,{\c&HE6F4FA&}
+Dialogue: 0,0:00:29.87,0:00:30.40,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}ASÍ QUE AQUÍ
+Dialogue: 0,0:00:30.40,0:00:31.13,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}NO ME PUE—
+Dialogue: 0,0:00:35.00,0:00:35.77,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}ESTOY BIEN, ¿EH?
+Dialogue: 0,0:00:36.10,0:00:36.70,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}ESTOY BIEN.
+Dialogue: 0,0:00:37.10,0:00:37.93,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}LO HE PROBADO
+Dialogue: 0,0:00:37.93,0:00:38.40,Gato,,0,0,0,,{\fscx115\fscy115\t(0,100,\fscx100\fscy100)}PARA EL {\c&H00D4FF&}PARTE.{\c&HE6F4FA&}
