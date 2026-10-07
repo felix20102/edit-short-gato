@@ -73,7 +73,7 @@ Medidas tomadas del original:
 - Ranking original: a la izquierda, en x 0–580 e y 500–1500, con etiquetas en inglés (Trickshot 💀, Baking 🤩, Play ball 😳, On target 👀, The end 😱).
 
 Qué se hace:
-- **Título:** solo se traduce, con el mismo tamaño, posición, tipografía (Roboto Condensed Bold, la más parecida disponible) y patrón de color: «**Ranking** <span>Garabatos</span> / Más **Graciosos**», es decir, «Ranking» blanco + «Garabatos» rojo / «Más» amarillo + «Graciosos» blanco. Se puede cambiar en `ajustes.json → titulo`.
+- **Título:** solo se traduce, con el mismo tamaño, posición, tipografía (Roboto Condensed Bold, la más parecida disponible) y patrón de color: «Ranking» blanco + «Garabatos» rojo / «Más» amarillo + «Graciosos» blanco. Se puede cambiar en `ajustes.json → titulo`.
 - **Ranking:** el original queda **sin tocar**. En los zooms de repetición se borra antes de ampliar y se repone sin ampliar, con una máscara sacada de los fotogramas en negro del original. Así se ve fijo y nítido.
 - **Zooms:** solo amplían la banda de vídeo. Centros: P5 cara del niño (500, 880), P4 ojos (600, 780), P3 morro del perro (560, 820), P2 encargado (880, 950), P1 boca y destello (640, 900).
 - **Logo «Miau con Criterio»:** al 60 %, centrado en la franja negra inferior (y = 1867), así no tapa la acción.
