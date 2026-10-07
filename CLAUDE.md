@@ -1,157 +1,52 @@
-Actúa como editor profesional de Shorts de humor para «Miau con Criterio».
+EDITOR DE SHORTS «MIAU CON CRITERIO» – INSTRUCCIONES DE MONTAJE
 
-Te proporcionaré un vídeo base, las imágenes de mi personaje y, cuando esté disponible, el guion o la narración. Tu trabajo es conservar el contenido del vídeo base y añadir una edición completa de personaje, comentarios, ranking, subtítulos y efectos.
+MATERIAL QUE TE PASO
+- Vídeo base de Rinzurank (MP4).
+- Voz del gato en MP3 (ElevenLabs).
+- Guion con los puestos, las frases y los tiempos del original.
+- Hoja de 20 poses de Don Miau (gato crema con gafas redondas), en 4 filas × 5 columnas.
 
-MATERIAL
-• Vídeo base: [ARCHIVO]
-• Referencias de estilo: [ARCHIVOS]
-• Personaje: gato pequeño de color crema con gafas redondas.
-• Poses del personaje: [ARCHIVO O PLANTILLA]
-• Tema del ranking: [TEMA]
-• Número de puestos: [5, O LOS QUE CORRESPONDAN]
-• Guion o narración: [ARCHIVO / TEXTO / NO DISPONIBLE]
+REGLAS FIJAS
+1. El ranking original NO se toca: ni se traduce, ni se tapa, ni se sustituye por otro.
+2. El título de arriba solo se traduce al español, con el mismo estilo del original: barra negra, mismos colores (blanco + rosa en la línea 1, amarillo + blanco en la línea 2), tipografía gruesa (Poppins Bold) y misma posición.
+3. Todo lo demás del vídeo original se queda igual, salvo lo que se indica abajo.
+4. La voz tiene que sonar fluida: recorta los silencios.
+5. Si el guion pide una pose que no está en la hoja, créala con el mismo gato y estilo y sigue sin preguntar.
 
-1. REVISA EL MATERIAL ANTES DE EDITAR
+PASO 1 – VOZ
+- Detecta los tramos de voz (umbral −45 dB, ventanas de 20 ms; une huecos menores de 0,15 s).
+- Deja 0,03 s de margen antes de cada tramo y 0,05 s después, con fundidos de 6 ms.
+- Pausas finales: 0,03–0,05 s dentro de una frase, 0,07–0,08 s entre frases.
+- Empareja cada tramo con su frase del guion. Si una frase viene en un solo bloque y conviene partirla (por ejemplo, en una coma), busca la pausa interna en la forma de onda y corta ahí.
 
-Identifica los clips, sus límites y el momento importante de cada uno: sorpresa, golpe, reacción, fallo o resultado inesperado.
+PASO 2 – ANÁLISIS DEL VÍDEO
+- Extrae todos los fotogramas y localiza los clips por los tramos negros entre ellos (brillo medio < 5 fuera del ranking).
+- En cada clip, marca el momento clave: agarrón, caída, susto o grito.
+- Mide la barra del título, la columna del ranking y la marca de agua.
+- Mira el audio original: los gritos y golpes se conservan y la voz nunca va encima.
 
-Conserva el orden, la velocidad y el audio relevante del vídeo base. No sustituyas los clips ni reconstruyas todo el montaje por tu cuenta.
+PASO 3 – LIMPIEZA
+- Marca de agua RINZURANK: calcula su opacidad con la media de los fotogramas negros, réstala de cada fotograma y rellena el contorno restante (inpaint Telea, radio 3).
+- Textos en inglés incrustados: crea una máscara con los píxeles que permanecen fijos mientras aparece el texto y cierra la máscara para cubrir toda la franja. Rellena esa zona y pega encima los píxeles del ranking tomados de un fotograma limpio. Después pon el texto en español en los mismos fotogramas, desplazado para no tapar el ranking.
+- Clip muy oscuro: súbele el brillo (gamma 0,68 y +6 %).
+- Quita los tramos negros entre clips.
 
-Puedes añadir escenas breves del gato entre clips cuando el comentario lo necesite. Si eso cambia la duración total, indícalo.
+PASO 4 – ORDEN
+- Sigue el orden del guion, salvo que con ese orden el ranking original pierda filas de un clip al siguiente. En ese caso usa el orden del vídeo original, para que se llene del 5 al 1. Cada frase va siempre con su clip. Avisa del cambio.
 
-Si el vídeo ya contiene ranking, subtítulos o efectos, evita duplicarlos. Si están incrustados y no se pueden retirar limpiamente, explica la limitación antes de intentar reemplazarlos.
+PASO 5 – ESTRUCTURA DE CADA PUESTO
+a) CLIP con su audio original y sin voz (incluye el golpe, el portazo o el grito final).
+b) REPETICIÓN del momento clave a 0,45–0,6x, con zoom suave de 1,0 a 1,2. La primera mitad de la frase entra 0,15 s después del corte. Encima, gato superpuesto abajo a la derecha (400 px de alto a 1080×1920) que aparece con rebote en 0,22 s. Vibración de 0,2 s y golpe sonoro en el impacto. Audio original ralentizado a −17 dB.
+c) ESCENA APARTE sobre fondo menta con textura de papel, que empieza justo con la segunda mitad de la frase. Lleva objetos dibujados que ilustran el chiste (cartel, trofeo, interruptor…). El gato entra desde la derecha. La escena dura lo que la frase más 0,4–0,8 s.
+- El zoom se ancla a la izquierda y se calcula para que el ranking quede siempre entre el título y los subtítulos.
+- CIERRE: último fotograma con el ranking completo nítido y el resto desenfocado y oscurecido; marco amarillo que late alrededor del ranking; gato señalándolo; frase «¿Y tú cuál habrías puesto en el número uno?».
 
-2. DECIDE QUÉ DICE EXACTAMENTE EL GATO
+PASO 6 – POSES (fila y columna, contando desde 0)
+- Pensando r0c2 · Señalando r0c4 · Presentando r0c3 · Gafas r0c1
+- Sorprendido r1c3 · Riendo r1c1 · Brazos cruzados r1c4 · Saludando r1c0
+- Ojos entornados r2c0 · Brazos abiertos r2c2 · Brazos en jarra r2c4
+- Triste r3c0 · Asustado r3c1 · Celebrando r3c2
 
-Si entrego un guion definitivo o una narración grabada, conserva sus palabras y sincroniza la edición con ellas.
-
-Si no entrego guion, escribe comentarios originales a partir de lo que realmente ocurre. Fija el texto exacto antes de preparar la voz y los subtítulos.
-
-El gato habla como un colega que está viendo el vídeo contigo:
-• Humor cercano, espontáneo y expresivo.
-• Comentarios breves con comparaciones absurdas, incredulidad o consecuencias hipotéticas.
-• Puede decir «pero tú has visto eso», «imagínate que…» o «si llega a…» cuando encajen.
-• No repitas esas construcciones en todos los clips.
-• No dice «miau».
-• No describe simplemente lo que ya se ve.
-• No inventa lesiones, identidades ni contexto.
-
-Ejemplo, únicamente si alguien intenta detener una puerta con la cabeza:
-«Pero ¿tú qué haces? ¿El botón de abrir lo llevas en la frente?».
-
-3. COORDINA CLIP, COMENTARIO Y PERSONAJE
-
-Utiliza dos tipos de aparición:
-
-A. GATO SUPERPUESTO AL CLIP
-Para una reacción corta mientras continúa la imagen.
-Colócalo en una zona libre, pequeño pero legible. No tapes caras, acciones importantes, ranking ni subtítulos.
-
-B. ESCENA APARTE DEL GATO
-Para desarrollar una comparación o rematar una broma.
-Usa un fondo claro sencillo, compatible con la marca: menta suave o papel claro con textura discreta.
-Después del comentario, vuelve al clip o al siguiente puesto mediante un corte directo.
-
-No insertes una escena aparte después de todos los clips por rutina. Elige según el chiste.
-
-Deja que se entienda la acción antes de comentarla. Conserva el sonido original cuando sea parte de la gracia.
-
-4. ANIMA AL GATO CON INTENCIÓN
-
-Selecciona poses según el comentario:
-• Pensando: analiza algo absurdo.
-• Señalando: llama la atención sobre un detalle.
-• Sorprendido: reacción inesperada.
-• Decepcionado: remate seco.
-• Riendo: situación graciosa.
-• Asustado: exageración cómica.
-• Brazos abiertos: incredulidad.
-• Ajustándose las gafas: falsa explicación seria.
-
-Combina cambios de pose con movimientos breves:
-• Entrada rápida desde un borde.
-• Pequeño rebote al aparecer.
-• Acercamiento para enfatizar una palabra.
-• Inclinación de incredulidad.
-• Salida rápida o caída para cerrar un remate.
-
-Evita que el personaje se mueva constantemente.
-
-Si solo hay imágenes estáticas, utiliza cambios de pose y movimientos de posición, escala y rotación. No prometas sincronización de labios sin preparar antes las bocas necesarias.
-
-5. DISEÑA LOS EFECTOS SEGÚN CADA CHISTE
-
-Asigna a cada efecto un propósito y un instante concreto:
-
-• ZOOM: destacar un detalle o acercar al gato durante el remate.
-• CONGELADO BREVE: permitir que se vea un detalle importante, después de la acción.
-• FLECHA O CÍRCULO: señalar algo que podría pasar desapercibido.
-• VIBRACIÓN CORTA: acompañar una sorpresa o impacto, sin dificultar la lectura.
-• DESENFOQUE DE MOVIMIENTO: entrada, salida o desplazamiento rápido del gato.
-• FONDO OSCURO CON LÍNEAS DE IMPACTO: exagerar miedo o dramatismo durante una frase concreta.
-• OBJETO RECORTADO: ilustrar una comparación del comentario, como una casa, un botón o una calculadora.
-• CAMBIO DE TAMAÑO: pasar de confianza a desconcierto o subrayar una reacción.
-• TEXTO DE REMATE: destacar una palabra que añade humor.
-• SONIDO BREVE: reforzar un gesto o una revelación sin tapar la voz.
-
-Como punto de partida, prueba efectos de énfasis de 0,15–0,4 segundos y congelados de 0,2–0,5 segundos. Ajusta su duración al audio y a la comprensión.
-
-No apliques todos los efectos a todos los clips. No añadas flashes o transiciones largas por decoración.
-
-6. RANKING Y TÍTULO
-
-Mientras se muestra el clip:
-• Título corto en la parte superior, legible y con buen contraste.
-• Lista compacta de puestos a un lado.
-• Puesto actual claramente destacado.
-• Valoraciones anteriores visibles cuando ayuden a seguir el ranking.
-• Etiquetas breves, ligadas al contenido.
-
-Respeta el orden del guion. No supongas que todos los rankings deben revelarse del último al primero si el vídeo base funciona de otra manera.
-
-Durante las escenas aparte del gato, simplifica la pantalla: retira temporalmente el tablero si distrae del comentario.
-
-Usa menta, crema y marrón oscuro como colores principales del canal, con un color de acento para destacar.
-
-7. SUBTÍTULOS Y SONIDO
-
-• Sincroniza los subtítulos con las palabras realmente pronunciadas.
-• Usa palabras individuales o grupos muy cortos según la velocidad de lectura.
-• Tipografía gruesa, contorno oscuro y contraste suficiente.
-• Destaca palabras clave sin cambiar todos los colores constantemente.
-• No superpongas subtítulos al ranking, al gato o a la acción.
-
-En el audio:
-• Narración clara por encima de la música.
-• Conserva los sonidos originales importantes.
-• Baja la música durante comentarios y momentos clave.
-• Usa sonidos de entrada, impacto o revelación con moderación.
-• Evita saturación y cambios bruscos de volumen.
-
-8. PREPARA UNA HOJA DE EDICIÓN EXACTA
-
-Antes del montaje, entrega una tabla con:
-
-Tiempo de entrada y salida | Acción del vídeo base | Frase exacta del gato | Aparición superpuesta o escena aparte | Pose | Movimiento del personaje | Efecto visual y duración | Subtítulo | Efecto de sonido | Estado del ranking
-
-No escribas instrucciones vagas como «poner efectos divertidos». Especifica qué efecto, sobre qué elemento, cuándo empieza y cuánto dura.
-
-9. ENTREGA Y VERIFICACIÓN
-
-Si puedes editar los archivos, realiza el montaje y entrega:
-• Vídeo final.
-• Proyecto editable, si la herramienta lo permite.
-• Hoja de edición con el texto exacto utilizado.
-• Lista de recursos adicionales empleados.
-
-Revisa el vídeo completo para comprobar que:
-• Cada comentario corresponde a lo que sucede.
-• Los efectos acompañan palabras o acciones concretas.
-• Se entiende el ranking.
-• El gato no tapa información.
-• Subtítulos y voz están sincronizados.
-• No hay fotogramas negros, elementos cortados ni audio saturado.
-
-Si no puedes editar o exportar, entrega el plan detallado y explica qué falta. No afirmes haber creado un vídeo que no has generado.
-
-El resultado debe sentirse como ver clips junto a un personaje gracioso: la acción prepara el chiste, el gato aporta la opinión y la edición refuerza el remate.
+PASO 7 – SUBTÍTULOS
+- Palabra a palabra, uniendo las palabras de 1–2 letras con la siguiente.
+- Poppins
