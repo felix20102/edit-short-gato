@@ -1,7 +1,7 @@
 # Hoja de edición · «Ranking mejores desastres del año»
 
 Canal: Miau con Criterio · 1080×1920 · 30 fps · Solo cortes secos
-Vídeo fuente: `ssstik.io_memepremeo_1791393753702.mp4` (31,3 s). **No está en este entorno.**
+Vídeo fuente: `ssstik.io_memepremeo_1791393753702.mp4` (31,3 s, 576×1024, escalado ×1,875 a 1080×1920).
 
 ## Estado del montaje
 
@@ -11,11 +11,11 @@ Vídeo fuente: `ssstik.io_memepremeo_1791393753702.mp4` (31,3 s). **No está en 
 | Subtítulos | ✅ `subtitulos.ass` (estilo del canal) y `subtitulos.srt` |
 | Hoja de edición con tiempos reales | ✅ Este documento |
 | Script de montaje | ✅ `herramientas/montar.py` monta el vídeo entero con los recursos que haya en `recursos/` |
-| Borrador completo | ✅ `salida/ranking_desastres_borrador.mp4`: voz, subtítulos, efectos, SFX y título reales; gato, fondos y props provisionales |
-| Vídeo fuente | ❌ No recibido |
+| Borrador completo | ✅ `salida/ranking_desastres_borrador.mp4`: clips reales, título traducido, ranking original, voz, subtítulos, efectos y SFX; gato, fondos y props provisionales |
+| Vídeo fuente | ✅ Recibido y revisado fotograma a fotograma |
 | Poses en archivos separados (PNG con transparencia) | ❌ Solo llegaron como imagen en el chat, no como archivo |
 | Poses nuevas, fondos, props, logo | ❌ No recibidos (ver lista al final) |
-| **Vídeo final** | ❌ Falta el vídeo fuente y los PNG; con ellos, `python3 herramientas/montar.py` lo genera |
+| **Vídeo final** | ⏳ Montado con el vídeo real; faltan los PNG del gato, fondos y props (hoy provisionales) |
 
 ## Cambio de duración: 35,5 s → 40,6 s (+5,1 s)
 
@@ -67,12 +67,19 @@ Problema: las poses de la hoja 1 no llevan corbata y las de la hoja 2 sí. En el
 
 *Cambio pedido: el ranking del original y el estilo del título se mantienen.*
 
-- **Ranking:** el del vídeo original (puestos 1–5 a la izquierda) se queda **sin tocar**. No se añade panel propio ni etiquetas.
-- **Título:** solo se traduce. Se tapa «Ranking Funniest Scribble Moments» y se escribe «RANKING DE LOS MOMENTOS / MÁS GRACIOSOS CON GARABATOS» con la misma tipografía, color y contorno que el original. Los valores están en `ajustes.json → titulo` y hay que igualarlos al estilo original cuando llegue el vídeo.
-- En los zooms de repetición, el título y el ranking del original **no se amplían**: se mantienen fijos (`ajustes.json → zonas_fijas`).
-- Logo «Miau con Criterio»: abajo al centro, al 60 %, en y ≈ 1760, solo durante los clips.
-- Subtítulos: crema #FAF4E6, contorno marrón #332314 de 7 px y palabra clave en #FFD400. Su altura cambia según la tarjeta para no tapar al gato: 1420 (gato 1), 1720 (gatos 2, 4 y 5) y 330 (gato 3).
-- Los dibujos a lápiz del original no se usan: los cortes de origen ya los excluyen.
+Medidas tomadas del original:
+- Franja negra superior: y 0–375. Banda de vídeo: y 375–1815. Franja negra inferior: y 1815–1920.
+- Título original: «Ranking Funniest / Scribble Moments». Letra condensada en negrita, sin contorno. Bases de línea en y = 250 y 343. Colores: blanco + rojo #F60F10 / amarillo #ECFF00 + blanco.
+- Ranking original: a la izquierda, en x 0–580 e y 500–1500, con etiquetas en inglés (Trickshot 💀, Baking 🤩, Play ball 😳, On target 👀, The end 😱).
+
+Qué se hace:
+- **Título:** solo se traduce, con el mismo tamaño, posición, tipografía (Roboto Condensed Bold, la más parecida disponible) y patrón de color: «**Ranking** <span>Garabatos</span> / Más **Graciosos**», es decir, «Ranking» blanco + «Garabatos» rojo / «Más» amarillo + «Graciosos» blanco. Se puede cambiar en `ajustes.json → titulo`.
+- **Ranking:** el original queda **sin tocar**. En los zooms de repetición se borra antes de ampliar y se repone sin ampliar, con una máscara sacada de los fotogramas en negro del original. Así se ve fijo y nítido.
+- **Zooms:** solo amplían la banda de vídeo. Centros: P5 cara del niño (500, 880), P4 ojos (600, 780), P3 morro del perro (560, 820), P2 encargado (880, 950), P1 boca y destello (640, 900).
+- **Logo «Miau con Criterio»:** al 60 %, centrado en la franja negra inferior (y = 1867), así no tapa la acción.
+- **Subtítulos:** crema #FAF4E6, contorno marrón #332314 de 7 px y palabra clave en #FFD400. Solo aparecen en las tarjetas del gato. Altura: 1420 (gato 1), 1720 (gatos 2, 4 y 5) y 330 (gato 3).
+- **Recorte de la niña de reojo:** sale del fotograma orig. 8,5 s, caja (600, 560)–(1000, 960).
+- Los dibujos a lápiz del original no se usan: los cortes de origen ya los excluyen. Comprobado fotograma a fotograma.
 
 ## Línea de tiempo
 
@@ -89,7 +96,7 @@ Tiempos en segundos del montaje final. Ajustar al fotograma más cercano a 30 fp
 | 8,17–8,33 | | | | | | El bate da una vuelta (360°) en 5 f y golpea la cara en 8,33 | — | bonk metálico 8,33 | |
 | 8,33 | | | | → Hoja 2 · 4, gafas torcidas 12° | | Flash rojo de 3 f (8,33–8,43) · temblor ±12 px 8,33–8,58 | — | | |
 | 8,60 | | | | | Rebote mínimo | Tirita en la nariz, pop 8,60–8,70 (**se queda hasta el final**) | — | blip 8,60 | |
-| **9,00–10,50** | P4 clip A. orig. 5,60–7,10. Vuelca el vaso | — | Clip | — | — | — | — | Audio original | Original |
+| **9,00–10,50** | P4 clip A. orig. **5,67–7,17** (el guion decía 5,60, pero 5,60–5,63 es negro en el original). Vuelca el vaso | — | Clip | — | — | — | — | Audio original | Original |
 | **10,50–11,60** | P4 clip B. orig. 7,80–8,90. Mirada de reojo | — | Clip | — | — | — | — | Audio original | Original |
 | **11,60–12,30** | Repetición orig. 8,20–8,90 a velocidad normal | — | Clip | — | — | Zoom rápido a los ojos, del 100 % al 220 %, 11,60–11,85 | — | Audio original | Original |
 | **12,30–17,40** | — | (ver sub-filas) | Escena aparte · papel | Hoja 2 · 1 en primerísimo plano descentrado a la izquierda, con las orejas cortadas por arriba. Portapapeles y tirita | Desliza desde la izquierda 12,30–12,50, con desenfoque de movimiento | — | SEÑORITA, 12,40–13,02 · PARA EL PARTE: 13,34–13,97 · ¿ESTO QUÉ ES 14,41–14,95 | whoosh 12,30 | — (tarjeta a pantalla completa) |

@@ -120,10 +120,6 @@ def _pegar_recortado(lienzo, img, x, y):
     lienzo.alpha_composite(img.crop((x0 - x, y0 - y, x1 - x, y1 - y)), (x0, y0))
 
 
-def texto_contorno(d, xy, txt, f, relleno, contorno, grosor, anchor="mm"):
-    d.text(xy, txt, font=f, fill=relleno, stroke_width=grosor, stroke_fill=contorno, anchor=anchor)
-
-
 def capa_color(color, alfa):
     return Image.new("RGBA", (W, H), color + (int(255 * alfa),))
 
@@ -513,9 +509,9 @@ class Fuente:
     def provisional(self, t_orig, etiqueta):
         img = Image.new("RGBA", (W, H), (48, 52, 58, 255))
         d = ImageDraw.Draw(img)
-        d.rectangle(AJ["titulo"]["caja"], fill=(20, 20, 20))
+        d.rectangle([0, 0, W, AJ["banda_video"][1]], fill=(0, 0, 0))
         d.text((540, 125), "Ranking Funniest Scribble Moments", font=fuente(54), fill=(255, 255, 255), anchor="mm")
-        x0, y0, x1, y1 = AJ["zonas_fijas"]["ranking"]
+        x0, y0, x1, y1 = AJ["ranking"]["caja"]
         d.rectangle([x0 + 10, y0 + 10, x1 - 10, y1 - 10], outline=(200, 200, 200), width=4)
         for k in range(5):
             d.text((x0 + 40, y0 + 90 + k * 170), f"{k + 1}.", font=fuente(70), fill=(230, 230, 230), anchor="lm")
@@ -534,7 +530,7 @@ class Fuente:
 CLIPS = [
     (0.00, 2.36, "p5", 0.20, 1.0, None, 0, 0, "P5 · clip"),
     (2.36, 3.48, "p5", 2.00, 0.5, 1.6, 2.36, 0.34, "P5 · repetición 50 %"),
-    (9.00, 10.50, "p4", 5.60, 1.0, None, 0, 0, "P4 · clip A"),
+    (9.00, 10.50, "p4", 5.67, 1.0, None, 0, 0, "P4 · clip A"),
     (10.50, 11.60, "p4", 7.80, 1.0, None, 0, 0, "P4 · clip B"),
     (11.60, 12.30, "p4", 8.20, 1.0, 2.2, 11.60, 0.25, "P4 · repetición"),
     (17.40, 18.30, "p3", 13.00, 1.0, None, 0, 0, "P3 · clip A"),
@@ -548,36 +544,49 @@ CLIPS = [
 
 
 def zoom(img, escala, cx, cy):
+    """Amplía solo la banda de vídeo; la franja negra con el título queda fija."""
     if escala <= 1.001:
         return img
-    w, h = W / escala, H / escala
-    x0 = min(max(0, cx - w / 2), W - w)
-    y0 = min(max(0, cy - h / 2), H - h)
-    return img.crop((int(x0), int(y0), int(x0 + w), int(y0 + h))).resize((W, H), Image.BICUBIC)
+    bx0, by0, bx1, by1 = AJ["banda_video"]
+    bw, bh = bx1 - bx0, by1 - by0
+    w, h = bw / escala, bh / escala
+    x0 = min(max(bx0, cx - w / 2), bx1 - w)
+    y0 = min(max(by0, cy - h / 2), by1 - h)
+    img = img.copy()
+    img.paste(img.crop((int(x0), int(y0), int(x0 + w), int(y0 + h))).resize((bw, bh), Image.BICUBIC), (bx0, by0))
+    return img
 
 
-_parche_color = {}
+_mascaras = {}
 
 
-def titulo_traducido(lienzo, original):
+def mascara_ranking(fuente_v, puesto):
+    """Silueta del ranking original, sacada de un fotograma en negro del mismo tramo."""
+    if puesto not in _mascaras:
+        cfg = AJ["ranking"]
+        negro = fuente_v.frame(cfg["mascara_t"][puesto], "máscara").convert("L").crop(cfg["caja"])
+        m = negro.point(lambda v: 255 if v > 40 else 0).filter(ImageFilter.MaxFilter(13))
+        _mascaras[puesto] = m.filter(ImageFilter.GaussianBlur(2))
+    return _mascaras[puesto]
+
+
+def sin_ranking(recorte, mascara):
+    import cv2
+    rgb = np.asarray(recorte.convert("RGB"))
+    m = (np.asarray(mascara) > 20).astype(np.uint8) * 255
+    return Image.fromarray(cv2.inpaint(rgb, m, 7, cv2.INPAINT_TELEA)).convert("RGBA")
+
+
+def titulo_traducido(lienzo):
     cfg = AJ["titulo"]
-    x0, y0, x1, y1 = cfg["caja"]
     d = ImageDraw.Draw(lienzo)
-    if cfg["parche"] == "desenfoque":
-        lienzo.paste(original.crop((x0, y0, x1, y1)).filter(ImageFilter.GaussianBlur(30)), (x0, y0))
-    else:
-        borde = np.concatenate([np.asarray(original.crop((x0, y1, x1, min(H, y1 + 6))))[..., :3].reshape(-1, 3),
-                                np.asarray(original.crop((x0, y0, x1, y0 + 4)))[..., :3].reshape(-1, 3)])
-        d.rectangle([x0, y0, x1 - 1, y1 - 1], fill=tuple(int(v) for v in np.median(borde, axis=0)))
-    tam = cfg["tamano"]  # se reduce hasta que la línea más larga quepa en la caja
-    while tam > 20 and max(fuente(tam, cfg["fuente"]).getlength(t) for t in cfg["lineas"]) > (x1 - x0) * 0.94:
-        tam -= 2
-    f = fuente(tam, cfg["fuente"])
-    alto = tam * cfg["interlineado"]
-    y = (y0 + y1) / 2 - alto * (len(cfg["lineas"]) - 1) / 2
-    for linea in cfg["lineas"]:
-        texto_contorno(d, ((x0 + x1) / 2, y), linea, f, cfg["relleno"], cfg["contorno"], cfg["grosor_contorno"])
-        y += alto
+    d.rectangle(cfg["caja"], fill=cfg["parche"])
+    f = fuente(cfg["tamano"], cfg["fuente"])
+    for trozos, base in zip(cfg["lineas"], cfg["bases"]):
+        x = W / 2 - sum(f.getlength(txt) for txt, _ in trozos) / 2
+        for txt, color in trozos:
+            d.text((x, base), txt, font=f, fill=color, anchor="ls")
+            x += f.getlength(txt)
 
 
 def frame_clip(fuente_v, t):
@@ -590,14 +599,15 @@ def frame_clip(fuente_v, t):
     img = original.copy()
     if zh:
         cx, cy = AJ["zooms"][puesto]
+        if fuente_v.ruta:  # el ranking se borra antes de ampliar y se repone sin ampliar
+            caja = AJ["ranking"]["caja"]
+            mascara = mascara_ranking(fuente_v, puesto)
+            img.paste(sin_ranking(original.crop(caja), mascara), caja[:2])
         img = zoom(img, lerp(1.0, zh, suave(tramo(t, zt0, zd))), cx, cy)
-        # el título y el ranking del original no se amplían
-        for nombre, caja in AJ["zonas_fijas"].items():
-            if nombre.startswith("_"):
-                continue
-            img.paste(original.crop(caja), caja[:2])
-    titulo_traducido(img, original)
-    pegar(img, LOGO, W / 2, 1760)
+        if fuente_v.ruta:
+            img.paste(original.crop(caja), caja[:2], mascara)
+    titulo_traducido(img)
+    pegar(img, LOGO, W / 2, AJ["logo_y"])
     return img
 
 

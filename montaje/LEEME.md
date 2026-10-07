@@ -17,4 +17,6 @@ Lo que falte en `recursos/` se sustituye por un provisional y aparece listado al
 | `recursos/logo.png` | Logo del canal |
 
 Encuadres, zooms, título traducido y anclas de los accesorios en cada pose: `ajustes.json`.
-Emoji 📋: Twemoji (CC-BY 4.0).
+Requisitos: ffmpeg, Python 3 con `numpy`, `Pillow` y `opencv-python-headless`.
+
+Emoji 📋: Twemoji (CC-BY 4.0). Fuente del título: Roboto Condensed (Apache 2.0).
