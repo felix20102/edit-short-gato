@@ -9,36 +9,32 @@ Necesita `mal_dia/recursos/fuente/ssstik.io_memepremeo_1791465337459.mp4` (no se
 
 ## Qué hace
 
-- **Clips:** el original con su sonido. El título se traduce con la misma letra y los mismos colores («Ranking **Mejores** / Momentos de **Mal Día**»). El ranking de la izquierda queda tal cual; en las repeticiones con zoom no se amplía.
-- **Tarjetas del gato** (estilo de las referencias): personaje grande, reencuadres, subtítulo de una palabra en colores, cortes secos, flashes de 2 fotogramas, música de fondo y SFX.
-- **Narración:** el archivo de ElevenLabs troceado por frases. **Ninguna palabra se corta**; en la tarjeta 3 «perfecto» se oye entero y el vaso revienta justo después.
+- **Clip y luego la frase del gato**, sin zooms ni repeticiones en los clips.
+- **Clips:** el original con su sonido. El título se traduce con la misma letra y colores («Ranking **Mejores** / Momentos de **Mal Día**»). El ranking de la izquierda queda tal cual.
+- **Tarjetas del gato:** el papel arrugado de los vídeos de referencia, gato en plano normal, subtítulo de una palabra en colores, cortes secos, música de fondo y SFX.
+- **Narración:** ninguna palabra se corta («perfecto» se oye entero).
 
-## Línea de tiempo (46,2 s)
+## Línea de tiempo (41,0 s)
 
 | Tramo | Contenido |
 |---|---|
 | 0,00–3,20 | Clip 5 (orig. 0,00–3,20) |
-| 3,20–4,20 | Repetición 5 al 60 % con zoom al móvil |
-| 4,20–8,93 | Gato 1 · rejilla · «Asesor de la suerte. Con este trébol, el móvil nunca se cae.» Se le cuela el móvil y pierde una hoja (4 → 3) |
-| 8,93–11,27 | Clip 4 (orig. 6,00–8,35) |
-| 11,27–12,27 | Repetición 4 al 60 % con zoom a la persiana |
-| 12,27–17,07 | Gato 2 · papel · «Yo conozco esa persiana. Ayer intenté pasar agachado.» Se gira, corte a la prueba (rayas y oreja doblada) · 0,5 s · «Agaché poco.» |
-| 17,07–19,80 | Clip 3 A (orig. 9,10–10,30) + B (orig. 12,90–14,45) |
-| 19,80–20,70 | Repetición 3 al 55 % con zoom al vaso |
-| 20,70–25,17 | Gato 3 · cafetería · «A ver, dejadme a mí. Palillo arriba, golpe seco y queda perfecto.» El vaso revienta (3 → 2 hojas) |
-| 25,17–27,97 | Clip 2 A (orig. 17,60–20,40) |
-| 27,97–29,07 | Repetición 2 al 55 % con zoom a la caída |
-| 29,07–30,87 | Clip 2 B (orig. 25,80–27,60) |
-| 30,87–35,43 | Gato 4 · nieve · «Tranquilos, yo solo grababa. Al que graba nunca le hacen nada.» Placaje del tío recortado del clip (2 → 1 hoja) |
-| 35,43–38,03 | Clip 1 (orig. 29,10–31,70) |
-| 38,03–39,23 | Repetición 1 al 50 % con zoom al plancha |
-| 39,23–43,80 | Gato 5 · barro · «Estoy bien, ¿eh? Estoy bien. Aún me queda una hoja.» Se cae la última hoja (1 → 0) |
-| 43,80–46,20 | Cierre sin voz · gato negro cruzando · viñeta y «dun dun DUUUN» |
+| 3,20–7,93 | Gato 1 · «Asesor de la suerte. Con este trébol, el móvil nunca se cae.» Se le cae el móvil y pierde una hoja (4 → 3) |
+| 7,93–10,27 | Clip 4 (orig. 6,00–8,35) |
+| 10,27–15,07 | Gato 2 · «Yo conozco esa persiana. Ayer intenté pasar agachado.» Se gira y sale con rayas y la oreja doblada · «Agaché poco.» |
+| 15,07–17,80 | Clip 3 (orig. 9,10–10,30 y 12,90–14,45) |
+| 17,80–22,27 | Gato 3 · «A ver, dejadme a mí. Palillo arriba, golpe seco y queda perfecto.» Revienta el vaso (3 → 2) |
+| 22,27–26,87 | Clip 2 (orig. 17,60–20,40 y 25,80–27,60) |
+| 26,87–31,43 | Gato 4 · «Tranquilos, yo solo grababa. Al que graba nunca le hacen nada.» Placaje (2 → 1) |
+| 31,43–34,03 | Clip 1 (orig. 29,10–31,70) |
+| 34,03–38,60 | Gato 5 · «Estoy bien, ¿eh? Estoy bien. Aún me queda una hoja.» Se cae la última hoja (1 → 0) |
+| 38,60–41,00 | Cierre sin voz · gato negro · «dun dun DUUUN» |
 
 ## Recursos
 
 - Poses: tu hoja básica (fila 1 col. 1, fila 3 col. 1, fila 1 col. 5, fila 2 col. 3, fila 1 col. 4 y fila 4 col. 5).
 - Recortes del propio vídeo: el tío de la nieve (orig. 26,5, GrabCut guiado) y las máscaras del ranking.
-- Dibujados por el script: fondos (papel arrugado, rejilla, cafetería, jardín nevado, barro), trébol, móvil, palillo, vaso de bubble tea, tapioca, manchas, rayas de persiana, oreja doblada, cartel y gato negro (tu pose en negro).
+- Fondo: el papel arrugado de los vídeos de referencia (`recursos/fondo_papel.png`).
+- Dibujados por el script: trébol, móvil, palillo, vaso de bubble tea, tapioca, manchas, rayas de persiana, oreja doblada, cartel y gato negro (tu pose en negro).
 - Sintetizados por el script: música de fondo y todos los SFX.
 - Emoji 🍀: Twemoji (CC-BY 4.0).

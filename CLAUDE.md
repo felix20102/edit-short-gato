@@ -155,3 +155,15 @@ Revisa el vídeo completo para comprobar que:
 Si no puedes editar o exportar, entrega el plan detallado y explica qué falta. No afirmes haber creado un vídeo que no has generado.
 
 El resultado debe sentirse como ver clips junto a un personaje gracioso: la acción prepara el chiste, el gato aporta la opinión y la edición refuerza el remate.
+
+PREFERENCIAS DEL USUARIO (aplicar siempre, tienen prioridad sobre lo anterior)
+
+• Estructura: cada clip original y, justo después, la frase del gato. Clip → frase → clip → frase.
+• Clips: tal cual el original, con su sonido. Sin zooms, sin repeticiones a cámara lenta y sin efectos encima.
+• Ranking de la izquierda del original: no tocarlo nunca, dejarlo original (aunque esté en inglés).
+• Título de arriba: solo traducirlo, con la misma letra, posición y colores que el original.
+• Gato: en plano normal, centrado y entero, como en los vídeos de referencia. Nada de primeros planos ni de acercarlo demasiado.
+• Fondo de las escenas del gato: el mismo papel arrugado de los vídeos de referencia (mal_dia/recursos/fondo_papel.png).
+• Estilo de las escenas del gato: copiar los vídeos de referencia (subtítulo de una palabra en colores, cortes secos, música de fondo y efectos de sonido).
+• Narración: no cortar ninguna palabra, aunque el guion pida una frase cortada.
+• Entregar siempre el vídeo como archivo descargable en el chat y explicar cómo descargarlo.
