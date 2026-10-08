@@ -28,8 +28,14 @@ def recortar(rgb, x0, y0, x1, y1):
     ancho = alfa.shape[1]
     for i in range(1, n):
         x, w, area = stats[i, cv2.CC_STAT_LEFT], stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_AREA]
-        toca_lado = x <= 5 or x + w >= ancho - 5
+        y, h = stats[i, cv2.CC_STAT_TOP], stats[i, cv2.CC_STAT_HEIGHT]
+        toca_lado = x <= 5 or x + w >= ancho - 5 or y <= 5 or y + h >= alfa.shape[0] - 5
         if i != mayor and (area < 25 or toca_lado):
+            alfa[etiquetas == i] = 0
+    # huecos de fondo encerrados (entre brazo y cuerpo): blanco puro y grande → transparente
+    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats(np.where((relleno == 1) & (alfa > 0), 1, 0).astype(np.uint8), 4)
+    for i in range(1, n):
+        if stats[i, cv2.CC_STAT_AREA] > 350:
             alfa[etiquetas == i] = 0
     img = Image.fromarray(np.dstack([pad, alfa]), "RGBA")
     a = img.getchannel("A").filter(ImageFilter.GaussianBlur(0.7))
