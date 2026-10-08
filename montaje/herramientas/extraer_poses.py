@@ -7,39 +7,56 @@ import os
 
 import cv2
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw
 
 HOJAS = "recursos/hojas"
 SALIDA = "recursos/poses"
 
 
 def recortar(rgb, x0, y0, x1, y1):
-    """Recorta una celda y quita solo el blanco exterior (el de las gafas y los ojos se queda)."""
+    """Recorta una celda y quita el fondo exterior sin dejar halo blanco alrededor del contorno.
+
+    El blanco de dentro (gafas, ojos) se conserva. Los píxeles grisáceos del antialias entre el
+    contorno negro y el fondo se convierten en contorno semitransparente en vez de quedar claros.
+    """
     celda = rgb[y0:y1, x0:x1]
-    pad = cv2.copyMakeBorder(celda, 4, 4, 4, 4, cv2.BORDER_CONSTANT, value=(255, 255, 255))
-    blanco = (pad.min(axis=2) > 232).astype(np.uint8)
-    exterior = np.zeros((pad.shape[0] + 2, pad.shape[1] + 2), np.uint8)
-    relleno = blanco.copy()
-    cv2.floodFill(relleno, exterior, (0, 0), 2)
-    alfa = np.where(relleno == 2, 0, 255).astype(np.uint8)
-    # descarta motas sueltas y trozos de la pose vecina que asoman por los lados
-    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats((alfa > 0).astype(np.uint8), 8)
+    pad = cv2.copyMakeBorder(celda, 6, 6, 6, 6, cv2.BORDER_CONSTANT, value=(255, 255, 255))
+    mx, mn = pad.max(axis=2).astype(int), pad.min(axis=2).astype(int)
+    claro = ((mn > 150) & (mx - mn < 28)).astype(np.uint8)  # blanco o gris claro sin color
+    relleno = claro.copy()
+    cv2.floodFill(relleno, np.zeros((pad.shape[0] + 2, pad.shape[1] + 2), np.uint8), (0, 0), 2)
+    fondo = relleno == 2
+    figura = ~fondo
+    # descarta motas sueltas y trozos de la pose vecina que asoman por los bordes
+    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats(figura.astype(np.uint8), 8)
     mayor = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
-    ancho = alfa.shape[1]
+    alto, ancho = figura.shape
     for i in range(1, n):
-        x, w, area = stats[i, cv2.CC_STAT_LEFT], stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_AREA]
-        y, h = stats[i, cv2.CC_STAT_TOP], stats[i, cv2.CC_STAT_HEIGHT]
-        toca_lado = x <= 5 or x + w >= ancho - 5 or y <= 5 or y + h >= alfa.shape[0] - 5
-        if i != mayor and (area < 25 or toca_lado):
-            alfa[etiquetas == i] = 0
-    # huecos de fondo encerrados (entre brazo y cuerpo): blanco puro y grande → transparente
-    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats(np.where((relleno == 1) & (alfa > 0), 1, 0).astype(np.uint8), 4)
+        x, y, w, h, area = stats[i]
+        toca = x <= 7 or y <= 7 or x + w >= ancho - 7 or y + h >= alto - 7
+        if i != mayor and (area < 25 or toca):
+            figura[etiquetas == i] = False
+    # huecos de fondo encerrados (entre brazo y cuerpo): blanco grande → transparente
+    blanco = (mn > 236) & (mx - mn < 12)  # blanco puro: el crema del gato no entra
+    n, etiquetas, stats, _ = cv2.connectedComponentsWithStats((blanco & figura).astype(np.uint8), 4)
     for i in range(1, n):
         if stats[i, cv2.CC_STAT_AREA] > 350:
-            alfa[etiquetas == i] = 0
-    img = Image.fromarray(np.dstack([pad, alfa]), "RGBA")
-    a = img.getchannel("A").filter(ImageFilter.GaussianBlur(0.7))
-    img.putalpha(a)
+            figura[etiquetas == i] = False
+            fondo[etiquetas == i] = True
+    alfa = np.where(figura, 255, 0).astype(np.float32)
+    color = pad.astype(np.float32)
+    # franja de antialias (3 px fuera de la figura): alfa según lo oscuro, color del contorno
+    cerca = cv2.dilate(figura.astype(np.uint8), np.ones((7, 7), np.uint8)).astype(bool) & ~figura
+    lum = pad.mean(axis=2)
+    a_borde = np.clip((215 - lum) / (215 - 55), 0, 1) * 255
+    alfa[cerca] = a_borde[cerca]
+    color[cerca] = (28, 24, 24)
+    # el primer píxel claro pegado por dentro al fondo también se oscurece (sin halo)
+    borde_int = figura & cv2.dilate(fondo.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(bool)
+    claros = borde_int & (lum > 120)
+    alfa[claros] = np.clip((215 - lum[claros]) / (215 - 55), 0, 1) * 255
+    color[claros] = (28, 24, 24)
+    img = Image.fromarray(np.dstack([color, alfa]).astype(np.uint8), "RGBA")
     return img.crop(img.getbbox())
 
 
